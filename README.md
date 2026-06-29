@@ -207,15 +207,18 @@ Daily Quota	10,000 units
 Cost per request	1 unit per 100 comments
 Max comments fetched	~10,000 per day
 💡 Tip: For videos with 15K+ comments, only the most recent ~7K-10K will be fetched due to API limits.
-📸 Screenshots
+## 📸 Screenshots
+
 <p align="center">
-  <img src="screenshot-input.jpeg" alt="Input Page" width="700">
+  <img src="assets/input.jpeg" alt="Input Page" width="700">
 </p>
+
 <p align="center">
-  <img src="screenshot-Analysis.jpeg" alt="Results Dashboard" width="700">
+  <img src="assets/Analysis.jpeg" alt="Results Dashboard" width="700">
 </p>
+
 <p align="center">
-  <img src="screenshot-Sentiment.jpeg" alt="Results Dashboard" width="700">
+  <img src="assets/Sentiment.jpeg" alt="Sentiment Analysis" width="700">
 </p>
 📁 Project Structure
 plain
