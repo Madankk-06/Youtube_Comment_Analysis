@@ -82,6 +82,32 @@ plain
 | **Environment** | python-dotenv | Configuration management |
 
 ---
+## 📁 Project Structure
+
+youtube-comment-analytics/
+│
+├── 📂 scripts/
+│   ├── app.py              ← Main Streamlit app (Pipeline + Dashboard)
+│   ├── extract.py          ← YouTube API comment extraction
+│   ├── clean.py            ← Data cleaning & preprocessing
+│   ├── analyze.py          ← Sentiment analysis & NLP
+│   ├── load_to_mysql.py    ← ETL to MySQL
+│   └── dashboard.py        ← Standalone dashboard viewer
+│
+├── 📂 sql/
+│   └── schema.sql          ← MySQL database schema
+│
+├── 📂 data/                ← CSV files (auto-generated)
+│
+├── 📂 screenshot/          ← Screenshots & images
+│   ├── input.jpeg
+│   ├── Analysis.jpeg
+│   └── Sentiment.jpeg
+│
+├── .env                    ← Environment variables (not in git)
+├── .gitignore              ← Git ignore rules
+├── requirements.txt        ← Python dependencies
+└── README.md               ← This file
 
 ## 📦 Installation
 
@@ -93,7 +119,19 @@ plain
 
 ### Step 1: Clone the Repository
 
-```bash
+# 🖼️ Screenshots
+
+## Input Section
+
+![Input Section](screenshot/input.jpeg)
+
+## Analysis Section
+![Analysis Section](screenshot/Analysis.jpeg)
+
+## Sentimental Analysis Section
+![Sentiment Section](screenshot/Sentiment.jpeg)
+
+
 git clone https://github.com/yourusername/youtube-comment-analytics.git
 cd youtube-comment-analytics
 Step 2: Create Virtual Environment
@@ -208,41 +246,6 @@ Cost per request	1 unit per 100 comments
 Max comments fetched	~10,000 per day
 💡 Tip: For videos with 15K+ comments, only the most recent ~7K-10K will be fetched due to API limits.
 
-# 🖼️ Screenshots
-
-## Input Section
-
-![Input Section](screenshot/input.jpeg)
-
-## Analysis Section
-![Analysis Section](screenshot/Analysis.jpeg)
-
-## Sentimental Analysis Section
-![Sentiment Section](screenshot/Sentiment.jpeg)
-
-📁 Project Structure
-plain
-youtube-comment-analytics/
-│
-├── scripts/
-│   ├── app.py              ← Main Streamlit app (Pipeline + Dashboard)
-│   ├── extract.py          ← YouTube API comment extraction
-│   ├── clean.py            ← Data cleaning & preprocessing
-│   ├── analyze.py          ← Sentiment analysis & NLP
-│   ├── load_to_mysql.py    ← ETL to MySQL
-│   └── dashboard.py        ← Standalone dashboard viewer
-│
-├── sql/
-│   └── schema.sql          ← MySQL database schema
-│
-├── data/                   ← CSV files (auto-generated)
-│
-├── assets/                 ← Screenshots & images
-│
-├── .env                    ← Environment variables (not in git)
-├── .gitignore              ← Git ignore rules
-├── requirements.txt        ← Python dependencies
-└── README.md               ← This file
 
 🤝 Contributing
 Fork the repository
@@ -253,74 +256,6 @@ Open a Pull Request
 📄 License
 This project is licensed under the MIT License.
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/yourusername">Your Name</a>
+  Made with ❤️ by <a href="https://github.com/Madankk-06/Youtube_Comment_Analysis">Madan KK</a>
 </p>
-```
-GITHUB_PUSH_GUIDE.md
-Markdown
-Copy
-Code
-Preview
-# 🚀 GitHub Push Guide
 
-## Step 1: Install Git
-
-```bash
-# macOS
-brew install git
-
-# Ubuntu/Debian
-sudo apt-get install git
-Step 2: Configure Git
-bash
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
-Step 3: Create GitHub Repository
-Go to GitHub
-Click New Repository
-Name: youtube-comment-analytics
-Description: "AI-powered YouTube comment sentiment analysis dashboard"
-Choose Public or Private
-DO NOT initialize with README
-Click Create repository
-Step 4: Prepare Project Structure
-bash
-cd /path/to/youtube-comments-dashboard
-
-mkdir -p scripts sql data assets
-
-# Move your Python scripts to scripts/
-mv app.py scripts/
-# (Keep extract.py, clean.py, analyze.py, load_to_mysql.py, dashboard.py in scripts/)
-
-# Copy files to proper locations
-cp schema.sql sql/
-cp README.md .
-cp .gitignore .
-cp requirements.txt .
-Step 5: Initialize & Push
-bash
-git init
-git add .
-git commit -m "Initial commit: YouTube Comment Analytics Dashboard"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/youtube-comment-analytics.git
-git push -u origin main
-Done!
-Visit: https://github.com/YOUR_USERNAME/youtube-comment-analytics
-plain
-
----
-
-## 📋 Quick Setup Checklist
-
-| Step | Action |
-|------|--------|
-| 1 | Copy `app.py` to `scripts/` folder |
-| 2 | Copy `schema.sql` to `sql/` folder |
-| 3 | Copy `README.md`, `.gitignore`, `requirements.txt` to root |
-| 4 | Create `assets/` folder for screenshots |
-| 5 | Make sure `.env` has NO `VIDEO_ID` line |
-| 6 | Run `git init`, `git add .`, `git commit`, `git push` |
-
-All files are ready! Let me know if you need anything else.
