@@ -1,261 +1,326 @@
+
 # 🎬 YouTube Comment Analytics Dashboard
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python">
-  <img src="https://img.shields.io/badge/Streamlit-1.28+-red.svg" alt="Streamlit">
-  <img src="https://img.shields.io/badge/MySQL-8.0+-orange.svg" alt="MySQL">
-  <img src="https://img.shields.io/badge/YouTube%20Data%20API-v3-green.svg" alt="YouTube API">
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+  <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" />
+  <img src="https://img.shields.io/badge/Streamlit-1.28+-red.svg" />
+  <img src="https://img.shields.io/badge/MySQL-8.0+-orange.svg" />
+  <img src="https://img.shields.io/badge/YouTube_Data_API-v3-green.svg" />
+  <img src="https://img.shields.io/badge/NLP-TextBlob-purple.svg" />
+  <img src="https://img.shields.io/badge/License-MIT-success.svg" />
 </p>
 
 <p align="center">
-  <b>AI-powered sentiment analysis dashboard for YouTube comments with real-time data pipeline</b>
+<b>AI-powered YouTube Comment Analytics Dashboard using Python, Streamlit, MySQL and NLP</b><br>
+Analyze YouTube comments, detect sentiment, discover contestant mentions, and visualize insights in real time.
 </p>
 
 ---
 
-## 📋 Table of Contents
+# 📑 Table of Contents
 
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Tech Stack](#-tech-stack)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Usage](#-usage)
-- [Database Schema](#-database-schema)
-- [API Limits](#-api-limits)
-- [Screenshots](#-screenshots)
-- [Contributing](#-contributing)
-- [License](#-license)
+- Overview
+- Features
+- Architecture
+- Tech Stack
+- Project Structure
+- Installation
+- Configuration
+- Usage
+- Dashboard Features
+- Database Schema
+- API Limits
+- Screenshots
+- Future Enhancements
+- Contributing
+- License
 
 ---
 
-## ✨ Features
+# 📌 Overview
+
+This project extracts comments from YouTube videos using the **YouTube Data API v3**, cleans and preprocesses the data, performs **sentiment analysis using TextBlob**, stores processed records inside a **MySQL Star Schema**, and visualizes insights through an interactive **Streamlit dashboard**.
+
+---
+
+# ✨ Features
 
 | Feature | Description |
 |---------|-------------|
-| 🔗 **URL Analysis** | Paste any YouTube video URL and get instant analytics |
-| 🧠 **Sentiment Analysis** | AI-powered categorization (Positive / Neutral / Negative) |
-| 📊 **Interactive Dashboard** | Real-time charts with Plotly & Streamlit |
-| 🏆 **Contestant Detection** | Auto-detects mentions of show participants |
-| 📅 **Time Trends** | Track sentiment evolution over time |
-| 💬 **Top Comments** | Most liked comments with sentiment coloring |
-| 🗄️ **MySQL Integration** | Star schema data warehouse for analytics |
-| ⚡ **Progress Tracking** | Real-time progress bar during analysis |
+| 🔗 Video URL Analysis | Analyze any public YouTube video |
+| 💬 Comment Extraction | Fetch comments using YouTube Data API |
+| 🧹 Data Cleaning | Removes URLs, emojis, duplicates & unwanted characters |
+| 🧠 Sentiment Analysis | Positive, Neutral and Negative classification |
+| 🏆 Contestant Detection | Detect contestant mentions automatically |
+| 📈 Trend Analysis | Time-based sentiment visualization |
+| 📊 Interactive Dashboard | Plotly charts inside Streamlit |
+| 🗄️ MySQL Storage | Star Schema Data Warehouse |
+| ⚡ ETL Pipeline | Automated Extract → Transform → Load |
 
 ---
 
-## 🏗️ Architecture
-YouTube Video URL → YouTube API → Extract → Clean → Analyze → MySQL → Dashboard
-plain
+# 🏗️ Architecture
 
-### Data Pipeline Flow
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│   Extract   │ →  │    Clean    │ →  │   Analyze   │
-│  Comments   │    │Remove URLs, │    │  Sentiment  │
-│  (YouTube)  │    │ emojis, dupes│    │ + Mentions  │
-└─────────────┘    └─────────────┘    └──────┬──────┘
-│
-┌────────┴────────┐
-▼                 ▼
-┌──────────┐      ┌──────────┐
-│  MySQL   │      │ Streamlit│
-│  (Star   │      │ Dashboard│
-│  Schema) │      │ (Plotly) │
-└──────────┘      └──────────┘
-plain
+```text
+YouTube Video URL
+        │
+        ▼
+YouTube Data API
+        │
+        ▼
+Comment Extraction
+        │
+        ▼
+Data Cleaning
+        │
+        ▼
+Sentiment Analysis
+        │
+        ▼
+Contestant Detection
+        │
+        ▼
+MySQL Database
+        │
+        ▼
+Streamlit Dashboard
+```
+
+---
+
+# 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Language | Python 3.10+ |
+| Frontend | Streamlit |
+| Visualization | Plotly |
+| Database | MySQL 8 |
+| ORM | SQLAlchemy |
+| NLP | TextBlob |
+| Text Processing | NLTK |
+| API | YouTube Data API v3 |
+| Environment | python-dotenv |
 
 ---
 
-## 🛠️ Tech Stack
+# 📁 Project Structure
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Frontend** | Streamlit | Interactive web dashboard |
-| **Visualization** | Plotly | Charts & graphs |
-| **Backend** | Python 3.10+ | Data processing pipeline |
-| **API** | YouTube Data API v3 | Comment extraction |
-| **Database** | MySQL 8.0 | Data warehouse (Star Schema) |
-| **ORM** | SQLAlchemy | Database connectivity |
-| **NLP** | TextBlob | Sentiment analysis |
-| **NLP** | NLTK | Stop word removal |
-| **Environment** | python-dotenv | Configuration management |
-
----
-## 📁 Project Structure
-
+```text
 youtube-comment-analytics/
 │
-├── 📂 scripts/
-│   ├── app.py              ← Main Streamlit app (Pipeline + Dashboard)
-│   ├── extract.py          ← YouTube API comment extraction
-│   ├── clean.py            ← Data cleaning & preprocessing
-│   ├── analyze.py          ← Sentiment analysis & NLP
-│   ├── load_to_mysql.py    ← ETL to MySQL
-│   └── dashboard.py        ← Standalone dashboard viewer
+├── scripts/
+│   ├── app.py
+│   ├── extract.py
+│   ├── clean.py
+│   ├── analyze.py
+│   ├── load_to_mysql.py
+│   └── dashboard.py
 │
-├── 📂 sql/
-│   └── schema.sql          ← MySQL database schema
+├── sql/
+│   └── schema.sql
 │
-├── 📂 data/                ← CSV files (auto-generated)
-│
-├── 📂 screenshot/          ← Screenshots & images
+├── data/
+├── screenshot/
 │   ├── input.jpeg
 │   ├── Analysis.jpeg
 │   └── Sentiment.jpeg
 │
-├── .env                    ← Environment variables (not in git)
-├── .gitignore              ← Git ignore rules
-├── requirements.txt        ← Python dependencies
-└── README.md               ← This file
+├── requirements.txt
+├── .env
+├── .gitignore
+└── README.md
+```
 
-## 📦 Installation
+---
 
-### Prerequisites
+# 📦 Installation
 
-- Python 3.10 or higher
-- MySQL 8.0 or higher
-- YouTube Data API v3 Key ([Get one here](https://console.cloud.google.com/))
+## 1. Clone Repository
 
-### Step 1: Clone the Repository
+```bash
+git clone https://github.com/Madankk-06/Youtube_Comment_Analysis.git
+cd Youtube_Comment_Analysis
+```
 
-# 🖼️ Screenshots
+## 2. Create Virtual Environment
 
-## Input Section
-
-![Input Section](screenshot/input.jpeg)
-
-## Analysis Section
-![Analysis Section](screenshot/Analysis.jpeg)
-
-## Sentimental Analysis Section
-![Sentiment Section](screenshot/Sentiment.jpeg)
-
-
-git clone https://github.com/yourusername/youtube-comment-analytics.git
-cd youtube-comment-analytics
-Step 2: Create Virtual Environment
-bash
-# macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-
-# Windows
+```bash
 python -m venv venv
-venv\Scripts\activate
-Step 3: Install Dependencies
-bash
-pip install -r requirements.txt
-Step 4: Download NLTK Data
-bash
-python -c "import nltk; nltk.download('stopwords'); nltk.download('punkt')"
-⚙️ Configuration
-1. Create .env File
-Create a .env file in the project root:
-env
-# YouTube API Configuration
-YOUTUBE_API_KEY=your_youtube_api_key_here
+```
 
-# MySQL Database Configuration
+Activate:
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**macOS / Linux**
+
+```bash
+source venv/bin/activate
+```
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+## 4. Download NLTK Resources
+
+```bash
+python -c "import nltk;nltk.download('stopwords');nltk.download('punkt')"
+```
+
+---
+
+# ⚙️ Configuration
+
+Create a `.env` file.
+
+```env
+YOUTUBE_API_KEY=YOUR_API_KEY
+
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=your_mysql_password
-🔑 Get YouTube API Key: Google Cloud Console
-2. Setup MySQL Database
-bash
-mysql -u root -p
-sql
+DB_PASSWORD=your_password
+DB_NAME=youtube_analytics
+```
+
+Create Database
+
+```sql
 CREATE DATABASE youtube_analytics;
-USE youtube_analytics;
-Run the schema script:
-bash
+```
+
+Run Schema
+
+```bash
 mysql -u root -p youtube_analytics < sql/schema.sql
-🚀 Usage
-Run the Application
-bash
+```
+
+---
+
+# 🚀 Usage
+
+Run the application
+
+```bash
 streamlit run scripts/app.py
-The app will open at http://localhost:8501
-How to Use
-Paste a YouTube URL in the input field
-Example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-Click "Analyze Video" button
-Wait for processing (progress bar shows status)
-Extracting comments from YouTube API
-Cleaning & preprocessing
-Running sentiment analysis
-Saving to MySQL
-View Dashboard with:
-Sentiment distribution (pie chart)
-Top mentioned contestants (bar chart)
-Sentiment trend over time (line graph)
-Top comments table (color-coded)
-🗄️ Database Schema
-Star Schema Design
-sql
--- Dimension: Date
-dim_date (
-    date_id INT PK,
-    full_date DATE,
-    year INT,
-    month INT,
-    day INT,
-    day_of_week VARCHAR(20)
-)
+```
 
--- Dimension: Contestant
-dim_contestant (
-    contestant_id INT PK,
-    contestant_name VARCHAR(255),
-    first_seen_date DATE
-)
+Open
 
--- Fact: Comments
-fact_comments (
-    comment_id VARCHAR(100) PK,
-    date_id INT FK,
-    video_id VARCHAR(50),
-    author VARCHAR(255),
-    sentiment VARCHAR(20),
-    like_count INT,
-    processed_text TEXT
-)
+```text
+http://localhost:8501
+```
 
--- Fact: Mentions (Bridge Table)
-fact_mentions (
-    mention_id INT PK,
-    comment_id VARCHAR(100) FK,
-    contestant_id INT FK,
-    mention_count INT DEFAULT 1
-)
+Workflow
 
--- Staging Table
-staging_comments (
-    comment_id VARCHAR(100) PK,
-    author VARCHAR(255),
-    text TEXT,
-    like_count INT,
-    published_at DATETIME,
-    video_id VARCHAR(50),
-    loaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-)
-⚠️ API Limits
-Table
-Limit	Value
-Daily Quota	10,000 units
-Cost per request	1 unit per 100 comments
-Max comments fetched	~10,000 per day
-💡 Tip: For videos with 15K+ comments, only the most recent ~7K-10K will be fetched due to API limits.
+1. Paste YouTube URL.
+2. Click **Analyze Video**.
+3. Wait for extraction.
+4. Comments are cleaned.
+5. Sentiment is calculated.
+6. Data is stored in MySQL.
+7. Dashboard is generated.
 
+---
 
-🤝 Contributing
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
-📄 License
-This project is licensed under the MIT License.
+# 📊 Dashboard Features
+
+- Sentiment Distribution
+- Top Contestants
+- Most Liked Comments
+- Sentiment Trend
+- Total Comments
+- Positive/Negative Ratio
+- Interactive Plotly Charts
+
+---
+
+# 🗄 Database Schema
+
+Star Schema
+
+- **Fact Table**
+  - fact_comments
+  - fact_mentions
+
+- **Dimension Tables**
+  - dim_date
+  - dim_contestant
+
+- **Staging**
+  - staging_comments
+
+---
+
+# ⚠ API Limits
+
+| Metric | Value |
+|---------|------:|
+| Daily Quota | 10,000 Units |
+| Cost | 1 Unit / 100 Comments |
+| Approx Comments | 7K–10K per day |
+
+---
+
+# 🖼 Screenshots
+
+## Input
+
+![Input](screenshot/input.jpeg)
+
+---
+
+## Dashboard
+
+![Dashboard](screenshot/Analysis.jpeg)
+
+---
+
+## Sentiment Analysis
+
+![Sentiment](screenshot/Sentiment.jpeg)
+
+---
+
+# 🚀 Future Enhancements
+
+- Multi-language sentiment analysis
+- Transformer-based NLP
+- User authentication
+- Docker deployment
+- Cloud deployment
+- Live analytics
+- Export reports
+
+---
+
+# 🤝 Contributing
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Push the branch.
+5. Open a Pull Request.
+
+---
+
+# 📄 License
+
+Licensed under the MIT License.
+
+---
+
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/Madankk-06/Youtube_Comment_Analysis">Madan KK</a>
-</p>
 
+Made with ❤️ by **Madan KK**
+
+⭐ If you found this project useful, don't forget to star the repository.
+
+</p>
