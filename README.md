@@ -207,19 +207,19 @@ Daily Quota	10,000 units
 Cost per request	1 unit per 100 comments
 Max comments fetched	~10,000 per day
 💡 Tip: For videos with 15K+ comments, only the most recent ~7K-10K will be fetched due to API limits.
-## 📸 Screenshots
 
-<p align="center">
-  <img src="assets/input.jpeg" alt="Input Page" width="700">
-</p>
+# 🖼️ Screenshots
 
-<p align="center">
-  <img src="assets/Analysis.jpeg" alt="Results Dashboard" width="700">
-</p>
+## Input Section
 
-<p align="center">
-  <img src="assets/Sentiment.jpeg" alt="Sentiment Analysis" width="700">
-</p>
+![Input Section](screenshot/input.jpeg)
+
+## Analysis Section
+![Analysis Section](screenshot/Analysis.jpeg)
+
+## Sentimental Analysis Section
+![Sentiment Section](screenshot/Sentiment.jpeg)
+
 📁 Project Structure
 plain
 youtube-comment-analytics/
