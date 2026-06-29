@@ -1,0 +1,21 @@
+cat > requirements.txt << 'EOF'
+# Core
+streamlit>=1.28.0
+pandas>=2.0.0
+plotly>=5.15.0
+
+# Database
+mysql-connector-python>=8.1.0
+SQLAlchemy>=2.0.0
+
+# YouTube API
+google-api-python-client>=2.100.0
+
+# NLP & Sentiment Analysis
+textblob>=0.17.1
+nltk>=3.8.1
+emoji>=2.8.0
+
+# Environment
+python-dotenv>=1.0.0
+EOF

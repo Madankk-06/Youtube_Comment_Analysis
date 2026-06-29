@@ -1,0 +1,39 @@
+cat > .gitignore << 'EOF'
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Data files (auto-generated)
+data/*.csv
+*.csv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# MySQL dumps
+*.sql.gz
+
+# Streamlit
+.streamlit/
+EOF
